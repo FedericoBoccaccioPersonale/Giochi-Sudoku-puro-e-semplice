@@ -9,7 +9,7 @@ Puoi tranquillamente scaricare dalla release o giocare on line.
 # Download
 [Ultima versione](https://github.com/FedericoBoccaccioPersonale/Giochi-Sudoku-puro-e-semplice/releases/latest) (tutte le piattaforme disponibili)
 
-🌐 [Gioca on line](https://federicoboccacciopersonale.github.io/Giochi-Sudoku-puro-e-semplice)
+🌐 [Gioca on line](https://federicoboccacciopersonale.github.io/Giochi-Sudoku-puro-e-semplice) (non tutte le versioni)
 
 # Informazioni
 Su GitHub c' è il repository principale, su GitLab è presente il suo clone per backup.
