@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cartelle della Repository</title>
+  <style>
+    body { font-family: sans-serif; padding: 2em; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 0.5em 0; }
+    a { text-decoration: none; color: #007acc; }
+  </style>
+</head>
+<body>
+  <h1>Cartelle disponibili</h1>
+  <ul id="folder-list"></ul>
+
+  <script>
+    function getRepoInfoFromURL() {
+      const hostMatch = window.location.hostname.match(/^([^\.]+)\.github\.io$/);
+      const pathMatch = window.location.pathname.match(/^\/([^\/]+)\/?/);
+      const urlParams = new URLSearchParams(window.location.search);
+
+      if (!hostMatch || !pathMatch) return null;
+
+      const owner = hostMatch[1];
+      const repo = pathMatch[1];
+      const branch = urlParams.get("branch") || "main"; // default a "main"
+
+      return { owner, repo, branch };
+    }
+
+    async function fetchFolders() {
+      const info = getRepoInfoFromURL();
+      if (!info) {
+        document.body.innerHTML = "<p>Impossibile determinare owner e repo dall'URL.</p>";
+        return;
+      }
+
+      const { owner, repo, branch } = info;
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/?ref=${branch}`;
+
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error(`Errore API: ${response.status}`);
+        const data = await response.json();
+
+        const folders = data.filter(item => item.type === "dir");
+        const list = document.getElementById("folder-list");
+
+        if (folders.length === 1) {
+          window.location.href = `./${folders[0].name}/`;
+          return;
+        }
+
+        folders.forEach(folder => {
+          const li = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = `./${folder.name}/`;
+          link.textContent = folder.name;
+          li.appendChild(link);
+          list.appendChild(li);
+        });
+      } catch (error) {
+        document.body.innerHTML = `<p>Errore nel recupero dei dati: ${error.message}</p>`;
+      }
+    }
+
+    fetchFolders();
+  </script>
+</body>
+</html>
