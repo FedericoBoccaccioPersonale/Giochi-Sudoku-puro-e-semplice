@@ -4,7 +4,6 @@ https://federicoboccaccio.wordpress.com/sudoku-puro-e-semplice/
 # Importante
 ⚠️ I file "Source code (.zip)" e "Source code (.tar.gz)" sono generati automaticamente da GitHub.<br>
 Contengono la versione WebGL creata con Unity, che *sorprendentemente* funziona: nel browser locale non riesco più a farla funzionare.<br>
-Per adattarlo al browser, ho modificato l' index cambiando in `div#unityContainer` lo style con `width: 600px; height: 900px;`, gli altri elementi sono opzionali.<br>
 Puoi tranquillamente scaricare dalla release o giocare on line.
 
 # Download
